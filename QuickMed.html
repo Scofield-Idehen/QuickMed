@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickMed - Instant Healthcare Assistance</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style id="app-style">
+    :root {
+      --primary-color: #4ade80;
+      --secondary-color: #065f46;
+      --light-color: #f0fdf4;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--light-color), white);
+    }
+    
+    .whatsapp-btn {
+      background-color: #25D366;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+      transition: all 0.3s ease;
+    }
+    
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    }
+    
+    .nearby-clinic-card {
+      border-left: 4px solid var(--primary-color);
+      transition: all 0.2s ease;
+    }
+    
+    .nearby-clinic-card:hover {
+      transform: translateX(5px);
+    }
+
+    .feature-icon {
+      background-color: var(--light-color);
+      color: var(--secondary-color);
+    }
+    
+    .location-modal {
+      backdrop-filter: blur(5px);
+    }
+    
+    .slide-up {
+      animation: slideUp 0.5s ease-out forwards;
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .fixed-whatsapp {
+        bottom: 1rem;
+        right: 50%;
+        transform: translateX(50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Navigation -->
+  <nav class="bg-white shadow-sm py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+        <i class="fas fa-heartbeat text-green-500 text-2xl mr-2"></i>
+        <h1 class="text-xl font-bold text-green-700">QuickMed</h1>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500">Home</a>
+        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500">Services</a>
+        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500">About Us</a>
+        <a href="javascript:void(0)" class="text-gray-600 hover:text-green-500">Contact</a>
+      </div>
+      <button class="md:hidden focus:outline-none">
+        <i class="fas fa-bars text-gray-500"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section py-16 md:py-24">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 mb-10 md:mb-0">
+        <h2 class="text-3xl md:text-5xl font-bold text-green-700 mb-4">Need Healthcare Advice?</h2>
+        <p class="text-lg md:text-xl text-gray-600 mb-8">Click below to chat on WhatsApp instantly and get quick assistance for your health concerns.</p>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <a href="https://wa.me/8163481913" class="whatsapp-btn flex items-center justify-center px-6 py-3 text-white rounded-lg text-lg">
+            <i class="fab fa-whatsapp text-xl mr-2"></i>
+            Chat with HealthBot
+          </a>
+          <button id="find-clinics-btn" class="bg-white border-2 border-green-500 text-green-600 px-6 py-3 rounded-lg text-lg hover:bg-green-50 transition">
+            <i class="fas fa-map-marker-alt mr-2"></i>
+            Find Nearby Clinics
+          </button>
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <img src="https://storage.googleapis.com/beckermedia/2021/12/1ed83bb3-allied-healthcare-professional-1024x709.jpg" alt="Healthcare Professional" class="w-full max-w-md mx-auto">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->https://storage.googleapis.com/beckermedia/2021/12/1ed83bb3-allied-healthcare-professional-1024x709.jpg
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl md:text-3xl font-bold text-center text-green-700 mb-12">How We Can Help You</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="feature-icon h-16 w-16 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-comment-medical text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-3">Instant Chat Support</h4>
+          <p class="text-gray-600">Get immediate assistance through WhatsApp chat with our healthcare bot or professionals.</p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="feature-icon h-16 w-16 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-hospital-user text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-3">Find Local Healthcare</h4>
+          <p class="text-gray-600">Quickly locate healthcare providers near you when you need in-person assistance.</p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="feature-icon h-16 w-16 rounded-full flex items-center justify-center mb-4">
+            <i class="fas fa-user-md text-2xl"></i>
+          </div>
+          <h4 class="text-xl font-semibold mb-3">Expert Referrals</h4>
+          <p class="text-gray-600">Get connected with specialists if your condition requires advanced care or treatment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-16 bg-green-50">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl md:text-3xl font-bold text-center text-green-700 mb-12">How It Works</h3>
+      <div class="flex flex-col md:flex-row items-center justify-center">
+        <!-- Step 1 -->
+        <div class="md:w-1/3 px-4 text-center mb-8 md:mb-0">
+          <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-green-600 font-bold text-xl">1</span>
+          </div>
+          <h4 class="text-xl font-semibold mb-2">Chat on WhatsApp</h4>
+          <p class="text-gray-600">Click the WhatsApp button and start a conversation with our healthcare bot.</p>
+        </div>
+        
+        <div class="hidden md:block text-green-500 text-3xl px-4">
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="md:w-1/3 px-4 text-center mb-8 md:mb-0">
+          <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-green-600 font-bold text-xl">2</span>
+          </div>
+          <h4 class="text-xl font-semibold mb-2">Describe Your Symptoms</h4>
+          <p class="text-gray-600">Tell us what you're feeling so we can provide relevant assistance.</p>
+        </div>
+        
+        <div class="hidden md:block text-green-500 text-3xl px-4">
+          <i class="fas fa-long-arrow-alt-right"></i>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="md:w-1/3 px-4 text-center">
+          <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4 shadow-md">
+            <span class="text-green-600 font-bold text-xl">3</span>
+          </div>
+          <h4 class="text-xl font-semibold mb-2">Get Help</h4>
+          <p class="text-gray-600">Receive advice or be connected with a healthcare professional near you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl md:text-3xl font-bold text-center text-green-700 mb-12">What Our Users Say</h3>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4">"The WhatsApp health assistant was incredibly helpful when my son had a high fever. They guided me through the steps to take and connected me with a pediatrician nearby."</p>
+          <p class="font-semibold">- Sarah J.</p>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4">"I was traveling and needed medical advice urgently. This service helped me find a clinic within minutes. The chat function is so convenient!"</p>
+          <p class="font-semibold">- Michael T.</p>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-green-50 p-6 rounded-lg shadow-sm">
+          <div class="flex items-center mb-4">
+            <div class="text-yellow-400">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4">"As someone who works night shifts, having 24/7 access to medical advice through WhatsApp has been a game-changer for me."</p>
+          <p class="font-semibold">- Priya K.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-green-50">
+    <div class="container mx-auto px-4">
+      <h3 class="text-2xl md:text-3xl font-bold text-center text-green-700 mb-12">Frequently Asked Questions</h3>
+      <div class="max-w-3xl mx-auto">
+        <!-- FAQ Item 1 -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm cursor-pointer">
+            <h4 class="font-semibold text-lg">Is this service free to use?</h4>
+            <i class="fas fa-chevron-down text-green-600"></i>
+          </div>
+          <div class="bg-white px-4 pb-4 rounded-b-lg shadow-sm">
+            <p class="text-gray-600 mt-2">Yes, our initial WhatsApp consultation is completely free. If you need to be referred to a specialist, standard consultation fees may apply.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm cursor-pointer">
+            <h4 class="font-semibold text-lg">How quickly will I receive a response?</h4>
+            <i class="fas fa-chevron-down text-green-600"></i>
+          </div>
+          <div class="bg-white px-4 pb-4 rounded-b-lg shadow-sm">
+            <p class="text-gray-600 mt-2">Our AI health assistant responds immediately. If you need to speak with a healthcare professional, the typical wait time is less than 10 minutes.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="mb-6">
+          <div class="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm cursor-pointer">
+            <h4 class="font-semibold text-lg">Is my health information kept confidential?</h4>
+            <i class="fas fa-chevron-down text-green-600"></i>
+          </div>
+          <div class="bg-white px-4 pb-4 rounded-b-lg shadow-sm">
+            <p class="text-gray-600 mt-2">Absolutely. We adhere to strict privacy guidelines and ensure all your health information is kept secure and confidential.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="py-16 bg-green-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h3 class="text-2xl md:text-3xl font-bold mb-4">Ready to get health assistance?</h3>
+      <p class="text-xl mb-8">Chat with our HealthBot on WhatsApp now</p>
+      <a href="https://wa.me/8163481913" class="bg-white text-green-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-green-50 transition inline-flex items-center">
+        <i class="fab fa-whatsapp text-xl mr-2"></i>
+        Start Chatting
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h4 class="text-xl font-bold mb-4 flex items-center">
+            <i class="fas fa-heartbeat text-green-400 mr-2"></i>
+            QuickMed
+          </h4>
+          <p class="text-gray-400">Your quick access to quality healthcare advice and assistance.</p>
+        </div>
+        <div>
+          <h5 class="text-lg font-semibold mb-4">Quick Links</h5>
+          <ul class="space-y-2">
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Home</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Services</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">About Us</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-lg font-semibold mb-4">Services</h5>
+          <ul class="space-y-2">
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Health Consultation</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Find Clinics</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Health Tips</a></li>
+            <li><a href="javascript:void(0)" class="text-gray-400 hover:text-white">Emergency Assistance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-lg font-semibold mb-4">Connect With Us</h5>
+          <div class="flex space-x-4 mb-4">
+            <a href="javascript:void(0)" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-facebook"></i></a>
+            <a href="javascript:void(0)" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-twitter"></i></a>
+            <a href="javascript:void(0)" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-instagram"></i></a>
+            <a href="javascript:void(0)" class="text-gray-400 hover:text-white text-xl"><i class="fab fa-linkedin"></i></a>
+          </div>
+          <p class="text-gray-400">Email: contact@QuickMed.com</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 QuickMed. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed WhatsApp Button -->
+  <a href="https://wa.me/8163481913" class="fixed-whatsapp fixed bottom-6 right-6 whatsapp-btn pulse flex items-center justify-center px-4 py-3 text-white rounded-full text-lg z-50">
+    <i class="fab fa-whatsapp text-xl mr-2"></i>
+    <span>Chat with HealthBot</span>
+  </a>
+
+  <!-- Location Permission Modal -->
+  <div id="location-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 location-modal z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-xl p-6 m-4 max-w-lg w-full">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold text-green-700">Enable Location Services</h3>
+        <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p class="text-gray-600 mb-6">To show you nearby healthcare facilities, we need your permission to access your location.</p>
+      <div class="flex justify-end">
+        <button id="deny-location" class="px-4 py-2 text-gray-600 mr-2">Deny</button>
+        <button id="allow-location" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Allow Location Access</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nearby Clinics Panel -->
+  <div id="nearby-clinics-panel" class="hidden fixed bottom-0 inset-x-0 bg-white rounded-t-2xl shadow-xl z-40 max-h-[70vh] overflow-y-auto">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-xl font-bold text-green-700">Nearby Healthcare Options</h3>
+        <button id="close-panel" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div id="location-denied-message" class="hidden text-center py-8">
+        <i class="fas fa-map-marker-alt text-gray-400 text-4xl mb-4"></i>
+        <p class="text-gray-600 mb-4">Enable location to see nearby clinics.</p>
+        <button id="try-again-location" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+          Enable Location
+        </button>
+      </div>
+      
+      <div id="loading-clinics" class="hidden text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+        <p class="text-gray-600">Finding healthcare providers near you...</p>
+      </div>
+      
+      <div id="error-message" class="hidden text-center py-8">
+        <i class="fas fa-exclamation-circle text-red-500 text-4xl mb-4"></i>
+        <p class="text-gray-600 mb-2">Sorry, we couldn't find nearby clinics.</p>
+        <p class="text-gray-500">Please try again later or contact us directly.</p>
+      </div>
+      
+      <div id="clinics-list" class="space-y-4">
+        <!-- Clinic items will be added here by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script id="app-script">
+    document.addEventListener('DOMContentLoaded', function() {
+      // Show location modal after a short delay
+      setTimeout(() => {
+        document.getElementById('location-modal').classList.remove('hidden');
+      }, 2000);
+      
+      // Close modal button
+      document.getElementById('close-modal').addEventListener('click', function() {
+        document.getElementById('location-modal').classList.add('hidden');
+      });
+      
+      // Deny location button
+      document.getElementById('deny-location').addEventListener('click', function() {
+        document.getElementById('location-modal').classList.add('hidden');
+      });
+      
+      // Allow location button
+      document.getElementById('allow-location').addEventListener('click', function() {
+        document.getElementById('location-modal').classList.add('hidden');
+        showNearbyClinics();
+      });
+      
+      // Find clinics button
+      document.getElementById('find-clinics-btn').addEventListener('click', function() {
+        showNearbyClinics();
+      });
+      
+      // Close panel button
+      document.getElementById('close-panel').addEventListener('click', function() {
+        document.getElementById('nearby-clinics-panel').classList.add('hidden');
+      });
+      
+      // Try again location button
+      document.getElementById('try-again-location').addEventListener('click', function() {
+        document.getElementById('location-denied-message').classList.add('hidden');
+        document.getElementById('loading-clinics').classList.remove('hidden');
+        
+        // Simulate getting location permission and loading
+        setTimeout(() => {
+          document.getElementById('loading-clinics').classList.add('hidden');
+          loadClinicsList();
+        }, 2000);
+      });
+      
+      function showNearbyClinics() {
+        const panel = document.getElementById('nearby-clinics-panel');
+        panel.classList.remove('hidden');
+        panel.classList.add('slide-up');
+        
+        document.getElementById('loading-clinics').classList.remove('hidden');
+        document.getElementById('clinics-list').innerHTML = '';
+        document.getElementById('location-denied-message').classList.add('hidden');
+        document.getElementById('error-message').classList.add('hidden');
+        
+        // Simulate geolocation API
+        setTimeout(() => {
+          document.getElementById('loading-clinics').classList.add('hidden');
+          
+          // Simulate a successful response (this would be replaced by actual API call)
+          loadClinicsList();
+        }, 2000);
+      }
+      
+      function loadClinicsList() {
+        const clinicsList = document.getElementById('clinics-list');
+        clinicsList.innerHTML = '';
+        
+        // Mock data for nearby clinics
+        const mockClinics = [
+          {
+            name: "City General Hospital",
+            specialty: "General Practice & Emergency",
+            distance: "1.2 km",
+            phone: "+234-800-123-4567"
+          },
+          {
+            name: "HealthFirst Clinic",
+            specialty: "Family Medicine",
+            distance: "2.4 km",
+            phone: "+234-800-987-6543"
+          },
+          {
+            name: "Dr. Adewale's Practice",
+            specialty: "Pediatrics",
+            distance: "3.0 km",
+            phone: "+234-800-456-7890"
+          },
+          {
+            name: "Wellness Medical Center",
+            specialty: "General Medicine & Specialists",
+            distance: "3.8 km",
+            phone: "+234-800-222-3333"
+          }
+        ];
+        
+        // Create and append clinic elements
+        mockClinics.forEach(clinic => {
+          const clinicElement = document.createElement('div');
+          clinicElement.className = 'nearby-clinic-card bg-white p-4 shadow-sm rounded-lg';
+          clinicElement.innerHTML = `
+            <h4 class="font-semibold text-lg">${clinic.name}</h4>
+            <p class="text-gray-600 mb-2">${clinic.specialty}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-500">
+                <i class="fas fa-map-marker-alt text-green-500 mr-1"></i>
+                ${clinic.distance}
+              </span>
+              <a href="tel:${clinic.phone}" class="text-green-600 hover:text-green-700 font-semibold">
+                <i class="fas fa-phone-alt mr-1"></i>
+                Contact
+              </a>
+            </div>
+          `;
+          clinicsList.appendChild(clinicElement);
+        });
+      }
+      
+      // Toggle FAQ items
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // This would normally toggle the FAQ answers, but for simplicity
+          // we're showing them all by default in this prototype
+        });
+      });
+    });
+  </script>
+</body>
+</html>
